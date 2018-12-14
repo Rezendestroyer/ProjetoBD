@@ -1,0 +1,2 @@
+db.clientes.insertOne( { _id:"", nome:"", telefone:"", ..., carros:[] } );
+db.clientes.update({_id:""}, {"$addToSet":{"carros":{_id:"", modelo:"", ...}}});
