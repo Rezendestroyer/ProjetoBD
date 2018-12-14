@@ -84,11 +84,21 @@ namespace Projeto_Estacionamento
             }
         }
 
-        public List<ClientesDocument> consultarCliente()
+        public List<ClientesDocument> consultarClientes()
         {
             connectMongoDB();
 
             return clientes.Find(Builders<ClientesDocument>.Filter.Empty).ToList();
+        }
+
+        public BsonArray consultarCliente(string cpf)
+        {
+            connectMongoDB();
+
+            Expression<Func<ClientesDocument, bool>> filter =
+                     x => x.cpf.Equals(cpf);
+
+            return clientes.Find(filter).First().ToList();
         }
 
         //Cadastra o Veiculo com os dados recolhidos na Função CadastroVeiculo
