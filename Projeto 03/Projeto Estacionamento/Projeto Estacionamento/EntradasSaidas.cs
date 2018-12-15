@@ -13,25 +13,12 @@ namespace Projeto_Estacionamento
 {
     public partial class EntradasSaidas : Form
     {
-        private static String serverName = "127.0.0.1"; //LocalHost
-        private static String port = "5432"; //Porta Usada 
-        private static String userName = "postgres"; //Nome do Adm
-        private static String password = "banco"; //Senha (Definida)
-        private static String databaseName = "BDEstacionamento"; //Nome do Database 
-        private String connectionString = null; //Criando uma string para controle de conexao
-
         public EntradasSaidas()
         {
             InitializeComponent();
-            connectionString = String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};",
-                                                        serverName, port, userName, password, databaseName);
         }
 
         DBComandos comandos = new DBComandos();
-
-        private NpgsqlConnection connection;
-        private NpgsqlCommand command;
-        private NpgsqlDataReader result;
 
         private string pesquisaIDLE = "Pesquisar...";
 
@@ -91,41 +78,22 @@ namespace Projeto_Estacionamento
             {
                 if (cb_EntSaidCliente.SelectedIndex != 0 && cb_EntSaidPlaca.SelectedIndex != 0)
                 {
-                    connectPostgres();
-
-                    command = new NpgsqlCommand("INSERT INTO estacionamento.tb_entradasaida (cpf, placa, acao, hora, data) VALUES(@CPF, @PLACA, @ACAO, @HORA, @DATA);", connection);
-
-                    command.Parameters.Add("@CPF", NpgsqlTypes.NpgsqlDbType.Varchar);
-                    command.Parameters["@CPF"].Value = cb_EntSaidCliente.SelectedItem.ToString();
-
-                    command.Parameters.Add("@PLACA", NpgsqlTypes.NpgsqlDbType.Varchar);
-                    command.Parameters["@PLACA"].Value = cb_EntSaidPlaca.SelectedItem.ToString();
+                    EntradaSaida entradaSaida = new EntradaSaida(cb_EntSaidCliente.SelectedItem.ToString(), cb_EntSaidPlaca.SelectedItem.ToString(), null, Convert.ToDateTime(dt_EntSaidData.Value.Date + dt_EntSaidHora.Value.TimeOfDay));
 
                     foreach (RadioButton rb in gb_EntSaidAcao.Controls.OfType<RadioButton>())
                     {
                         if (rb.Checked)
                         {
-                            command.Parameters.Add("@ACAO", NpgsqlTypes.NpgsqlDbType.Varchar);
-                            command.Parameters["@ACAO"].Value = rb.Text;
+                            entradaSaida.setAcao(rb.Text);
                             break;
                         }
                     }
 
-                    command.Parameters.Add("@HORA", NpgsqlTypes.NpgsqlDbType.Time);
-                    command.Parameters["@HORA"].Value = dt_EntSaidHora.Value.TimeOfDay;
-
-                    command.Parameters.Add("@DATA", NpgsqlTypes.NpgsqlDbType.Date);
-                    command.Parameters["@DATA"].Value = dt_EntSaidData.Value.Date;
-
-                    command.ExecuteNonQuery();
-
-                    if (connection != null)
+                    if (comandos.cadastrarEntradaSaida(entradaSaida))
                     {
-                        connection.Close();
+                        MessageBox.Show("Cadastro realizado com sucesso!");
+                        clear();
                     }
-
-                    MessageBox.Show("Cadastro realizado com sucesso!");
-                    clear();
                 }
                 else
                 {

@@ -28,10 +28,6 @@ namespace Projeto_Estacionamento
 
         DBComandos comandos = new DBComandos();
 
-        private NpgsqlConnection connection;
-        private NpgsqlCommand command;
-        private NpgsqlDataReader result;
-
         private string pesquisaIDLE = "Pesquisar...";
         private string status = "Cadastrar";
 

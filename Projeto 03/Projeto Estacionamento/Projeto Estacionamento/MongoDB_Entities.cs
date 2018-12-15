@@ -100,7 +100,7 @@ namespace Projeto_Estacionamento
         public string modelo { get; set; }
     }
 
-    public class EntradaSaida
+    public class EntradaSaidaDocument
     {
         [BsonId()]
 
@@ -133,7 +133,7 @@ namespace Projeto_Estacionamento
 
         [BsonRequired()]
 
-        public DateTime hora { get; set; }
+        public TimeSpan hora { get; set; }
 
 
         [BsonElement("data")]

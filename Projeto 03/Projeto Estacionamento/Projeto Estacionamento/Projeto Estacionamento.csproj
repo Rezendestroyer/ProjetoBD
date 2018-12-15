@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="Cliente.cs" />
     <Compile Include="DBComandos.cs" />
+    <Compile Include="EntradaSaida.cs" />
     <Compile Include="EntradasSaidas.cs">
       <SubType>Form</SubType>
     </Compile>

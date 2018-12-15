@@ -20,6 +20,7 @@ namespace Projeto_Estacionamento
         IMongoDatabase database = null;
         IMongoClient client = null;
         IMongoCollection<ClientesDocument> clientes;
+        IMongoCollection<EntradaSaidaDocument> entradasSaidas;
 
         public DBComandos()
         {
@@ -33,6 +34,7 @@ namespace Projeto_Estacionamento
                 client = new MongoClient(connectionString);
                 database = client.GetDatabase(databaseName);
                 clientes = database.GetCollection<ClientesDocument>("clientes");
+                entradasSaidas = database.GetCollection<EntradaSaidaDocument>("entradasSaidas");
             }
             catch (NpgsqlException)
             {
@@ -84,6 +86,23 @@ namespace Projeto_Estacionamento
             }
         }
 
+        public bool atualizarCliente(Cliente cliente)
+        {
+            /*try
+            {
+
+            }
+            catch (Exception excep)
+            {
+                MessageBox.Show("Não foi possível realizar o cadastro do cliente!\n" +
+                    "Verifique se todos os campos foram preenchidos corretamente.\n\n" +
+                    "Erro: " + excep, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
+            }*/
+            return false;
+        }
+
         public List<ClientesDocument> consultarClientes()
         {
             connectMongoDB();
@@ -91,14 +110,14 @@ namespace Projeto_Estacionamento
             return clientes.Find(Builders<ClientesDocument>.Filter.Empty).ToList();
         }
 
-        public BsonArray consultarCliente(string cpf)
+        public ClientesDocument consultarCliente(string cpf)
         {
             connectMongoDB();
 
             Expression<Func<ClientesDocument, bool>> filter =
                      x => x.cpf.Equals(cpf);
 
-            return clientes.Find(filter).First().ToList();
+            return clientes.Find(filter).First();
         }
 
         //Cadastra o Veiculo com os dados recolhidos na Função CadastroVeiculo
@@ -133,105 +152,10 @@ namespace Projeto_Estacionamento
             }*/
         }
 
-        public BsonArray consultarVeiculo(string cpf)
-        {
-            connectMongoDB();
-
-            Expression<Func<ClientesDocument, bool>> filter =
-                     x => x.cpf.Equals(cpf);
-
-            ClientesDocument docCliente = clientes.Find(filter).First();
-
-            return docCliente.veiculos;
-        }
-
-        public bool atualizarCliente(Cliente cliente)
-        {
-            /*try
-            {
-                connectPostgres();
-
-                command = new NpgsqlCommand("UPDATE estacionamento.tb_cliente " +
-                    "SET nome = @NOME, telefone = @TELEFONE, celular = @CELULAR, " +
-                    "cep = @CEP, endereco = @ENDERECO, numero = @NUMERO, bairro = @BAIRRO, cidade = @CIDADE, estado = @ESTADO " +
-                    "WHERE cpf = @CPF;", connection);
-
-                command.Parameters.Add("@NOME", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@NOME"].Value = cliente.getNome();
-
-                command.Parameters.Add("@TELEFONE", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@TELEFONE"].Value = cliente.getTelefone();
-
-                command.Parameters.Add("@CELULAR", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@CELULAR"].Value = cliente.getCelular();
-
-                command.Parameters.Add("@CEP", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@CEP"].Value = cliente.getCep();
-
-                command.Parameters.Add("@ENDERECO", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@ENDERECO"].Value = cliente.getEndereco();
-
-                command.Parameters.Add("@NUMERO", NpgsqlTypes.NpgsqlDbType.Integer);
-                command.Parameters["@NUMERO"].Value = Convert.ToInt16(cliente.getNumero());
-
-                command.Parameters.Add("@BAIRRO", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@BAIRRO"].Value = cliente.getBairro();
-
-                command.Parameters.Add("@CIDADE", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@CIDADE"].Value = cliente.getCidade();
-
-                command.Parameters.Add("@ESTADO", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@ESTADO"].Value = cliente.getEstado();
-
-                command.Parameters.Add("@CPF", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@CPF"].Value = cliente.getCpf();
-
-                command.ExecuteNonQuery();
-
-                if (connection != null)
-                {
-                    connection.Close();
-                }
-
-                return true;
-            }
-            catch (Exception excep)
-            {
-                MessageBox.Show("Não foi possível realizar o cadastro do cliente!\n" +
-                    "Verifique se todos os campos foram preenchidos corretamente.\n\n" +
-                    "Erro: " + excep, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return false;
-            }*/
-            return false;
-        }
-
         public bool atualizarVeiculo(Veiculo veiculo)
         {
             /*try
             {
-                connectPostgres();
-
-                command = new NpgsqlCommand("UPDATE estacionamento.tb_veiculo SET cpf = @CPF, marca = @MARCA, modelo = @MODELO WHERE placa = @PLACA;", connection);
-
-                command.Parameters.Add("@CPF", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@CPF"].Value = veiculo.getCpf();
-
-                command.Parameters.Add("@MARCA", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@MARCA"].Value = veiculo.getMarca();
-
-                command.Parameters.Add("@MODELO", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@MODELO"].Value = veiculo.getModelo();
-
-                command.Parameters.Add("@PLACA", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@PLACA"].Value = veiculo.getPlaca();
-
-                command.ExecuteNonQuery();
-
-                if (connection != null)
-                {
-                    connection.Close();
-                }
 
                 return true;
             }
@@ -244,6 +168,49 @@ namespace Projeto_Estacionamento
             }*/
 
             return false;
-        }        
+        }
+
+        public BsonArray consultarVeiculo(string cpf)
+        {
+            connectMongoDB();
+
+            Expression<Func<ClientesDocument, bool>> filter =
+                     x => x.cpf.Equals(cpf);
+
+            ClientesDocument docCliente = clientes.Find(filter).First();
+
+            return docCliente.veiculos;
+        }         
+        
+        public bool cadastrarEntradaSaida(EntradaSaida entradaSaida)
+        {
+            try
+            {
+                connectMongoDB();
+
+                EntradaSaidaDocument doc = new EntradaSaidaDocument();
+
+                doc.cpf = entradaSaida.getCpf();
+
+                doc.placa = entradaSaida.getPlaca();
+
+                doc.acao = entradaSaida.getAcao();
+
+                doc.data = entradaSaida.getDataHora().Date;
+
+                doc.hora = entradaSaida.getDataHora().TimeOfDay;
+
+                entradasSaidas.InsertOne(doc);
+
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show("Não foi possível realizar o cadastro do cliente!\n" +
+                    "Verifique se todos os campos foram preenchidos corretamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
+            }
+        }
     }
 }
