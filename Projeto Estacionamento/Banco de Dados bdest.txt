@@ -1,0 +1,36 @@
+CREATE TABLE bdest.tb_usuarios(
+
+	idusuario serial primary key,
+	usuario varchar(100),
+	senha varchar(100) );
+
+CREATE TABLE bdest.tb_clientes(
+
+	idcliente serial primary key,
+	nome varchar(100),
+	cpf varchar(50),
+	celular varchar(50),
+	endereco varchar(100) );
+
+CREATE TABLE bdest.tb_veiculos(
+
+	idveiculo serial primary key,
+	marca varchar(50),
+	modelo varchar(50),
+	placa varchar(50) );
+	
+CREATE TABLE bdest.tb_acao(
+
+	idacao serial primary key,
+	cliente varchar(100),
+	placa varchar(50),
+	acao varchar(50),
+	hora varchar(50),
+	dia varchar(50) );
+	
+	
+INSERT INTO bdest.tb_usuarios(usuario , senha) VALUES ('Paulo Teixeira' , 'admincode')	
+
+SELECT * FROM bdest.tb_acao
+
+DROP TABLE bdest.tb_clientes
