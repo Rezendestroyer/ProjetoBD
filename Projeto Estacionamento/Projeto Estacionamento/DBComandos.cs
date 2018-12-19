@@ -9,6 +9,7 @@ using MongoDB.Driver;
 using System.Windows.Forms;
 using System.Linq.Expressions;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 
 namespace Projeto_Estacionamento
 {
@@ -90,6 +91,35 @@ namespace Projeto_Estacionamento
         {
             try
             {
+                connectMongoDB();
+
+                ClientesDocument doc = consultarCliente(cliente.getCpf());
+
+                if (doc != null)
+                {
+                    doc.cpf = cliente.getCpf();
+
+                    doc.nome = cliente.getNome();
+
+                    doc.telefone = cliente.getTelefone();
+
+                    doc.celular = cliente.getCelular();
+
+                    doc.cep = cliente.getCep();
+
+                    doc.endereco = cliente.getEndereco();
+
+                    doc.numero = Convert.ToInt16(cliente.getNumero());
+
+                    doc.bairro = cliente.getBairro();
+
+                    doc.cidade = cliente.getCidade();
+
+                    doc.estado = cliente.getEstado();
+
+                    clientes.ReplaceOne(x => x.cpf.Equals(cliente.getCpf()), doc);
+                }
+
                 return true;
             }
             catch (Exception excep)
@@ -122,8 +152,8 @@ namespace Projeto_Estacionamento
         //Cadastra o Veiculo com os dados recolhidos na Função CadastroVeiculo
         public bool cadastrarVeiculo(Veiculo veiculo)
         {
-            /*try
-            {*/
+            try
+            {
             VeiculosDocument doc = new VeiculosDocument
             {
                 placa = veiculo.getPlaca(),
@@ -141,20 +171,40 @@ namespace Projeto_Estacionamento
             clientes.UpdateOne(filter, update);
 
             return true;
-            /*}
+            }
             catch
             {
                 MessageBox.Show("Não foi possível realizar o cadastro do veículo!\n" +
                     "Verifique se todos os campos foram preenchidos corretamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
-            }*/
+            }
         }
 
         public bool atualizarVeiculo(Veiculo veiculo)
         {
-            /*try
+            try
             {
+                BsonArray docs = consultarVeiculos(veiculo.getCpf());
+
+                BsonArray newDocs = new BsonArray();
+
+                foreach (BsonDocument doc in docs)
+                {
+                    VeiculosDocument veiculoDoc = BsonSerializer.Deserialize<VeiculosDocument>(doc);
+
+                    if (veiculoDoc.placa == veiculo.getPlaca())
+                    {
+                        veiculoDoc.marca = veiculo.getMarca();
+                        veiculoDoc.modelo = veiculo.getModelo();
+                    }
+
+                    newDocs.Add(veiculoDoc.ToBsonDocument());
+                }
+
+                var update = Builders<ClientesDocument>.Update.Set(o => o.veiculos, newDocs);
+
+                clientes.UpdateOne(x => x.cpf.Equals(veiculo.getCpf()), update);
 
                 return true;
             }
@@ -164,12 +214,43 @@ namespace Projeto_Estacionamento
                     "Verifique se todos os campos foram preenchidos corretamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
-            }*/
-
-            return false;
+            }
         }
 
-        public BsonArray consultarVeiculo(string cpf)
+        public bool excluirVeiculo(Veiculo veiculo)
+        {
+            try
+            {
+                BsonArray docs = consultarVeiculos(veiculo.getCpf());
+
+                BsonArray newDocs = new BsonArray();
+
+                foreach (BsonDocument doc in docs)
+                {
+                    VeiculosDocument veiculoDoc = BsonSerializer.Deserialize<VeiculosDocument>(doc);
+
+                    if (veiculoDoc.placa != veiculo.getPlaca())
+                    {
+                        newDocs.Add(veiculoDoc.ToBsonDocument());
+                    }                    
+                }
+
+                var update = Builders<ClientesDocument>.Update.Set(o => o.veiculos, newDocs);
+
+                clientes.UpdateOne(x => x.cpf.Equals(veiculo.getCpf()), update);
+
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show("Não foi possível realizar o cadastro do veículo!\n" +
+                    "Verifique se todos os campos foram preenchidos corretamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
+            }
+        }
+
+        public BsonArray consultarVeiculos(string cpf)
         {
             connectMongoDB();
 
@@ -179,6 +260,28 @@ namespace Projeto_Estacionamento
             ClientesDocument docCliente = clientes.Find(filter).First();
 
             return docCliente.veiculos.AsBsonArray;
+        }
+
+        public VeiculosDocument consultarVeiculo(string cpf, string placa)
+        {
+            connectMongoDB();
+
+            Expression<Func<ClientesDocument, bool>> filter =
+                     x => x.cpf.Equals(cpf);
+
+            BsonArray docs= clientes.Find(filter).First().veiculos.AsBsonArray;
+
+            foreach (BsonDocument doc in docs)
+            {
+                VeiculosDocument veiculoDoc = BsonSerializer.Deserialize<VeiculosDocument>(doc);
+
+                if (veiculoDoc.placa == placa)
+                {
+                    return veiculoDoc;
+                }
+            }
+
+            return null;
         }
 
         public bool cadastrarEntradaSaida(EntradaSaida entradaSaida)

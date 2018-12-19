@@ -187,9 +187,9 @@
             this.panel_CadCCliente.Controls.Add(this.mtb_CadCCelular);
             this.panel_CadCCliente.Controls.Add(this.lb_CadCCelular);
             this.panel_CadCCliente.Controls.Add(this.lb_CadCCPF);
-            this.panel_CadCCliente.Controls.Add(this.mtb_CadCCPF);
             this.panel_CadCCliente.Controls.Add(this.mtb_CadCCEP);
             this.panel_CadCCliente.Controls.Add(this.cb_CadCCPF);
+            this.panel_CadCCliente.Controls.Add(this.mtb_CadCCPF);
             this.panel_CadCCliente.Location = new System.Drawing.Point(201, 12);
             this.panel_CadCCliente.Name = "panel_CadCCliente";
             this.panel_CadCCliente.Size = new System.Drawing.Size(571, 275);
@@ -656,8 +656,8 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel_CadCConsultar);
             this.Controls.Add(this.panel_CadCCliente);
+            this.Controls.Add(this.panel_CadCConsultar);
             this.Font = new System.Drawing.Font("Gadugi", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);

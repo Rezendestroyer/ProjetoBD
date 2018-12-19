@@ -106,7 +106,7 @@ namespace Projeto_Estacionamento
         {
             consultar();
 
-            BsonArray  docs = comandos.consultarVeiculo(cpf);
+            BsonArray  docs = comandos.consultarVeiculos(cpf);
             
             dg_CadVConsulta.Rows.Clear();
 
@@ -213,21 +213,17 @@ namespace Projeto_Estacionamento
 
             try
             {
-                /*connectPostgres();
-
-                command = new NpgsqlCommand("SELECT placa FROM estacionamento.tb_veiculo;", connection);
-
-                result = command.ExecuteReader();
-
                 cb_CadVPlaca.Items.Clear();
                 cb_CadVPlaca.Items.Add("");
 
-                while (result.Read())
-                {
-                    cb_CadVPlaca.Items.Add(result[0].ToString());
-                }
+                BsonArray docs = comandos.consultarVeiculos(cpf);
 
-                connection.Close();*/
+                foreach (BsonDocument doc in docs)
+                {
+                    VeiculosDocument veiculo = BsonSerializer.Deserialize<VeiculosDocument>(doc);
+
+                    cb_CadVPlaca.Items.Add(veiculo.placa);
+                }
             }
             catch (Exception excep)
             {
@@ -273,22 +269,10 @@ namespace Projeto_Estacionamento
         {
             try
             {
-                /*connectPostgres();
-
-                command = new NpgsqlCommand("SELECT * FROM estacionamento.tb_veiculo WHERE placa = @PLACA;", connection);
-
-                command.Parameters.Add("@PLACA", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@PLACA"].Value = cb_CadVPlaca.SelectedItem.ToString();
-
-                result = command.ExecuteReader();
-
-                result.Read();
-
-                Veiculo veiculo = new Veiculo(result[0].ToString(), result[1].ToString(), result[2].ToString(), result[3].ToString());
-
-                tb_CadVMarca.Text = veiculo.getMarca();
-                tb_CadVModelo.Text = veiculo.getModelo();
-                */
+                VeiculosDocument doc = comandos.consultarVeiculo(cpf, cb_CadVPlaca.SelectedItem.ToString());
+                
+                tb_CadVMarca.Text = doc.marca;
+                tb_CadVModelo.Text = doc.modelo;
             }
             catch (Exception excep)
             {

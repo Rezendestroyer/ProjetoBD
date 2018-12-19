@@ -263,8 +263,8 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.bt_EntSaidCancelar);
             this.panel3.Controls.Add(this.bt_EntSaidConfirmar);
+            this.panel3.Controls.Add(this.bt_EntSaidCancelar);
             this.panel3.Location = new System.Drawing.Point(201, 268);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(496, 56);
@@ -411,19 +411,19 @@
             this.tb_EntSaidPesquisa.Enter += new System.EventHandler(this.tb_EntSaidPesquisa_Enter);
             this.tb_EntSaidPesquisa.Leave += new System.EventHandler(this.tb_EntSaidPesquisa_Leave);
             // 
-            // EntradasSaidas
+            // CadastroEntradaSaida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(709, 336);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel_EntSaidConsultar);
             this.Controls.Add(this.panel_EntSaidCliente);
+            this.Controls.Add(this.panel_EntSaidConsultar);
+            this.Controls.Add(this.panel3);
             this.Font = new System.Drawing.Font("Gadugi", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.Name = "EntradasSaidas";
+            this.Name = "CadastroEntradaSaida";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Entradas e Saidas";
             this.Load += new System.EventHandler(this.EntradasSaidas_Load);

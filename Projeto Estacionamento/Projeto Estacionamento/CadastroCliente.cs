@@ -99,7 +99,7 @@ namespace Projeto_Estacionamento
                 {
                     if (MessageBox.Show("Tem certeza de que deseja excluir este registro?", "Excluir registro", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        connectPostgres();
+                        /*connectPostgres();
 
                         command = new NpgsqlCommand("DELETE FROM estacionamento.tb_cliente WHERE cpf = '"
                             + dg_CadCConsulta.SelectedCells[1].Value.ToString() + "';", connection);
@@ -118,7 +118,7 @@ namespace Projeto_Estacionamento
 
                         viewRecords();
 
-                        connection.Close();
+                        connection.Close();*/
                     }
                 }
                 else
@@ -134,7 +134,7 @@ namespace Projeto_Estacionamento
 
         private void bt_CadCPesquisar_Click(object sender, EventArgs e)
         {
-            connectPostgres();
+            /*connectPostgres();
 
             command = new NpgsqlCommand("SELECT * FROM estacionamento.tb_cliente WHERE (nome ~* @DADO OR cpf ~* @DADO OR telefone ~* @DADO OR celular ~* @DADO) ORDER BY nome;", connection);
 
@@ -145,7 +145,7 @@ namespace Projeto_Estacionamento
 
             viewRecords();
 
-            connection.Close();
+            connection.Close();*/
         }
 
         private void tb_CadCPesquisa_Enter(object sender, EventArgs e)
@@ -252,29 +252,19 @@ namespace Projeto_Estacionamento
 
             try
             {
-                connectPostgres();
-
-                command = new NpgsqlCommand("SELECT cpf FROM estacionamento.tb_cliente;", connection);
-
-                result = command.ExecuteReader();
+                List<ClientesDocument> docs = comandos.consultarClientes();
 
                 cb_CadCCPF.Items.Clear();
                 cb_CadCCPF.Items.Add("");
 
-                while (result.Read())
+                docs.ForEach(doc =>
                 {
-                    cb_CadCCPF.Items.Add(result[0].ToString());
-                }
-
-                connection.Close();
+                    cb_CadCCPF.Items.Add(doc.cpf);
+                });
             }
-            catch (NpgsqlException)
+            catch (Exception excep)
             {
-                MessageBox.Show("Não foi possível obter os valores do banco de dados!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (InvalidOperationException)
-            {
-                MessageBox.Show("Um erro ocorreu! Estamos trabalhando para logo corrigi-lo", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Não foi possível obter os valores do banco de dados!\n\nErro : " + excep, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             clear();
@@ -325,59 +315,17 @@ namespace Projeto_Estacionamento
         {
             try
             {
-                connectPostgres();
+                ClientesDocument doc = comandos.consultarCliente(cb_CadCCPF.SelectedItem.ToString());
 
-                command = new NpgsqlCommand("SELECT * FROM estacionamento.tb_cliente WHERE cpf = @CPF;", connection);
-
-                command.Parameters.Add("@CPF", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@CPF"].Value = cb_CadCCPF.SelectedItem.ToString();
-
-                result = command.ExecuteReader();
-
-                result.Read();
-
-                Cliente cliente = new Cliente(result[0].ToString(), result[1].ToString(), result[2].ToString(), result[3].ToString(),
-                    result[4].ToString(), result[5].ToString(), result[6].ToString(), result[7].ToString(), result[8].ToString(), result[9].ToString());
-
-                tb_CadCNome.Text = cliente.getNome();
-                mtb_CadCTelefone.Text = cliente.getTelefone();
-                mtb_CadCCelular.Text = cliente.getCelular();
-                mtb_CadCCEP.Text = cliente.getCep();
-                tb_CadCEndereco.Text = cliente.getEndereco();
-                tb_CadCNumero.Text = cliente.getNumero();
-                tb_CadCBairro.Text = cliente.getBairro();
-                tb_CadCCidade.Text = cliente.getCidade();
-                cb_CadCEstado.SelectedItem = cliente.getEstado(); // Verificar esta parte
-            }
-            catch (Exception excep)
-            {
-                MessageBox.Show("Não foi possível obter os valores do banco de dados!\n\nErro : " + excep, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void connectPostgres()
-        {
-            try
-            {
-                connection = new NpgsqlConnection("Server = 127.0.0.1; User Id = postgres; Password = banco; Database = dbestacionamento");
-                connection.Open();
-            }
-            catch (Exception excep)
-            {
-                MessageBox.Show("Não foi possivel conectar ao banco de dados!\n\nErro : " + excep, "Erro na conexão", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void viewRecords()
-        {
-            try
-            {                
-                dg_CadCConsulta.Rows.Clear();
-                
-                while (result.Read())
-                {
-                    dg_CadCConsulta.Rows.Add(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9]);
-                }
+                tb_CadCNome.Text = doc.nome;
+                mtb_CadCTelefone.Text = doc.telefone;
+                mtb_CadCCelular.Text = doc.celular;
+                mtb_CadCCEP.Text = doc.cep;
+                tb_CadCEndereco.Text = doc.endereco;
+                tb_CadCNumero.Text = doc.numero.ToString();
+                tb_CadCBairro.Text = doc.bairro;
+                tb_CadCCidade.Text = doc.cidade;
+                cb_CadCEstado.SelectedItem = doc.estado;
             }
             catch (Exception excep)
             {

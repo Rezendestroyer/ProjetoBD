@@ -43,17 +43,17 @@
             this.bt_CadVAtualizar = new System.Windows.Forms.Button();
             this.bt_CadVCadastrar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.bt_CadVCancelar = new System.Windows.Forms.Button();
+            this.bt_CadVConfirmar = new System.Windows.Forms.Button();
+            this.bt_CadVExcluir = new System.Windows.Forms.Button();
             this.panel_CadVConsultar = new System.Windows.Forms.Panel();
+            this.bt_CadCPesquisar = new System.Windows.Forms.Button();
             this.tb_CadVPesquisa = new System.Windows.Forms.TextBox();
             this.dg_CadVConsulta = new System.Windows.Forms.DataGridView();
             this.marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.placa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.bt_CadVCancelar = new System.Windows.Forms.Button();
-            this.bt_CadVConfirmar = new System.Windows.Forms.Button();
-            this.bt_CadVExcluir = new System.Windows.Forms.Button();
-            this.bt_CadCPesquisar = new System.Windows.Forms.Button();
             this.panel_CadVVeiculo.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -219,12 +219,55 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.bt_CadVCancelar);
-            this.panel3.Controls.Add(this.bt_CadVConfirmar);
             this.panel3.Controls.Add(this.bt_CadVExcluir);
+            this.panel3.Controls.Add(this.bt_CadVConfirmar);
             this.panel3.Location = new System.Drawing.Point(201, 268);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(421, 56);
             this.panel3.TabIndex = 1;
+            // 
+            // bt_CadVCancelar
+            // 
+            this.bt_CadVCancelar.Font = new System.Drawing.Font("Gadugi", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_CadVCancelar.Image = ((System.Drawing.Image)(resources.GetObject("bt_CadVCancelar.Image")));
+            this.bt_CadVCancelar.Location = new System.Drawing.Point(29, 3);
+            this.bt_CadVCancelar.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.bt_CadVCancelar.Name = "bt_CadVCancelar";
+            this.bt_CadVCancelar.Size = new System.Drawing.Size(175, 50);
+            this.bt_CadVCancelar.TabIndex = 1;
+            this.bt_CadVCancelar.Text = "Cancelar";
+            this.bt_CadVCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bt_CadVCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.bt_CadVCancelar.UseVisualStyleBackColor = true;
+            this.bt_CadVCancelar.Click += new System.EventHandler(this.bt_CadVCancelar_Click);
+            // 
+            // bt_CadVConfirmar
+            // 
+            this.bt_CadVConfirmar.Font = new System.Drawing.Font("Gadugi", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_CadVConfirmar.Image = global::Projeto_Estacionamento.Properties.Resources.check40x40;
+            this.bt_CadVConfirmar.Location = new System.Drawing.Point(216, 3);
+            this.bt_CadVConfirmar.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.bt_CadVConfirmar.Name = "bt_CadVConfirmar";
+            this.bt_CadVConfirmar.Size = new System.Drawing.Size(175, 50);
+            this.bt_CadVConfirmar.TabIndex = 0;
+            this.bt_CadVConfirmar.Text = "Confirmar";
+            this.bt_CadVConfirmar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.bt_CadVConfirmar.UseVisualStyleBackColor = true;
+            this.bt_CadVConfirmar.Click += new System.EventHandler(this.bt_CadVConfirmar_Click);
+            // 
+            // bt_CadVExcluir
+            // 
+            this.bt_CadVExcluir.Font = new System.Drawing.Font("Gadugi", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_CadVExcluir.Image = global::Projeto_Estacionamento.Properties.Resources.trash40x40;
+            this.bt_CadVExcluir.Location = new System.Drawing.Point(123, 3);
+            this.bt_CadVExcluir.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.bt_CadVExcluir.Name = "bt_CadVExcluir";
+            this.bt_CadVExcluir.Size = new System.Drawing.Size(175, 50);
+            this.bt_CadVExcluir.TabIndex = 2;
+            this.bt_CadVExcluir.Text = "Excluir";
+            this.bt_CadVExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.bt_CadVExcluir.UseVisualStyleBackColor = true;
+            this.bt_CadVExcluir.Click += new System.EventHandler(this.bt_CadVExcluir_Click);
             // 
             // panel_CadVConsultar
             // 
@@ -235,6 +278,19 @@
             this.panel_CadVConsultar.Name = "panel_CadVConsultar";
             this.panel_CadVConsultar.Size = new System.Drawing.Size(421, 251);
             this.panel_CadVConsultar.TabIndex = 0;
+            // 
+            // bt_CadCPesquisar
+            // 
+            this.bt_CadCPesquisar.Font = new System.Drawing.Font("Gadugi", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_CadCPesquisar.Image = global::Projeto_Estacionamento.Properties.Resources.lupa25x25;
+            this.bt_CadCPesquisar.Location = new System.Drawing.Point(385, 5);
+            this.bt_CadCPesquisar.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.bt_CadCPesquisar.Name = "bt_CadCPesquisar";
+            this.bt_CadCPesquisar.Size = new System.Drawing.Size(33, 33);
+            this.bt_CadCPesquisar.TabIndex = 1;
+            this.bt_CadCPesquisar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.bt_CadCPesquisar.UseVisualStyleBackColor = true;
+            this.bt_CadCPesquisar.Click += new System.EventHandler(this.bt_CadCPesquisar_Click);
             // 
             // tb_CadVPesquisa
             // 
@@ -296,62 +352,6 @@
             this.panel1.Size = new System.Drawing.Size(2, 312);
             this.panel1.TabIndex = 18;
             // 
-            // bt_CadVCancelar
-            // 
-            this.bt_CadVCancelar.Font = new System.Drawing.Font("Gadugi", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_CadVCancelar.Image = ((System.Drawing.Image)(resources.GetObject("bt_CadVCancelar.Image")));
-            this.bt_CadVCancelar.Location = new System.Drawing.Point(29, 3);
-            this.bt_CadVCancelar.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.bt_CadVCancelar.Name = "bt_CadVCancelar";
-            this.bt_CadVCancelar.Size = new System.Drawing.Size(175, 50);
-            this.bt_CadVCancelar.TabIndex = 1;
-            this.bt_CadVCancelar.Text = "Cancelar";
-            this.bt_CadVCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.bt_CadVCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.bt_CadVCancelar.UseVisualStyleBackColor = true;
-            this.bt_CadVCancelar.Click += new System.EventHandler(this.bt_CadVCancelar_Click);
-            // 
-            // bt_CadVConfirmar
-            // 
-            this.bt_CadVConfirmar.Font = new System.Drawing.Font("Gadugi", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_CadVConfirmar.Image = global::Projeto_Estacionamento.Properties.Resources.check40x40;
-            this.bt_CadVConfirmar.Location = new System.Drawing.Point(216, 3);
-            this.bt_CadVConfirmar.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.bt_CadVConfirmar.Name = "bt_CadVConfirmar";
-            this.bt_CadVConfirmar.Size = new System.Drawing.Size(175, 50);
-            this.bt_CadVConfirmar.TabIndex = 0;
-            this.bt_CadVConfirmar.Text = "Confirmar";
-            this.bt_CadVConfirmar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.bt_CadVConfirmar.UseVisualStyleBackColor = true;
-            this.bt_CadVConfirmar.Click += new System.EventHandler(this.bt_CadVConfirmar_Click);
-            // 
-            // bt_CadVExcluir
-            // 
-            this.bt_CadVExcluir.Font = new System.Drawing.Font("Gadugi", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_CadVExcluir.Image = global::Projeto_Estacionamento.Properties.Resources.trash40x40;
-            this.bt_CadVExcluir.Location = new System.Drawing.Point(123, 3);
-            this.bt_CadVExcluir.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.bt_CadVExcluir.Name = "bt_CadVExcluir";
-            this.bt_CadVExcluir.Size = new System.Drawing.Size(175, 50);
-            this.bt_CadVExcluir.TabIndex = 2;
-            this.bt_CadVExcluir.Text = "Excluir";
-            this.bt_CadVExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.bt_CadVExcluir.UseVisualStyleBackColor = true;
-            this.bt_CadVExcluir.Click += new System.EventHandler(this.bt_CadVExcluir_Click);
-            // 
-            // bt_CadCPesquisar
-            // 
-            this.bt_CadCPesquisar.Font = new System.Drawing.Font("Gadugi", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_CadCPesquisar.Image = global::Projeto_Estacionamento.Properties.Resources.lupa25x25;
-            this.bt_CadCPesquisar.Location = new System.Drawing.Point(385, 5);
-            this.bt_CadCPesquisar.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.bt_CadCPesquisar.Name = "bt_CadCPesquisar";
-            this.bt_CadCPesquisar.Size = new System.Drawing.Size(33, 33);
-            this.bt_CadCPesquisar.TabIndex = 1;
-            this.bt_CadCPesquisar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.bt_CadCPesquisar.UseVisualStyleBackColor = true;
-            this.bt_CadCPesquisar.Click += new System.EventHandler(this.bt_CadCPesquisar_Click);
-            // 
             // CadastroVeiculo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
@@ -360,8 +360,8 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel_CadVConsultar);
             this.Controls.Add(this.panel_CadVVeiculo);
+            this.Controls.Add(this.panel_CadVConsultar);
             this.Font = new System.Drawing.Font("Gadugi", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.Name = "CadastroVeiculo";
