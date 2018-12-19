@@ -92,12 +92,13 @@
     </Compile>
     <Compile Include="Cliente.cs" />
     <Compile Include="DBComandos.cs" />
-    <Compile Include="EntradasSaidas.cs">
+    <Compile Include="CadastroEntradaSaida.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EntradasSaidas.Designer.cs">
-      <DependentUpon>EntradasSaidas.cs</DependentUpon>
+    <Compile Include="CadastroEntradaSaida.Designer.cs">
+      <DependentUpon>CadastroEntradaSaida.cs</DependentUpon>
     </Compile>
+    <Compile Include="EntradaSaida.cs" />
     <Compile Include="Evento.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
@@ -132,8 +133,8 @@
     <EmbeddedResource Include="CadastroVeiculo.resx">
       <DependentUpon>CadastroVeiculo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EntradasSaidas.resx">
-      <DependentUpon>EntradasSaidas.cs</DependentUpon>
+    <EmbeddedResource Include="CadastroEntradaSaida.resx">
+      <DependentUpon>CadastroEntradaSaida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>

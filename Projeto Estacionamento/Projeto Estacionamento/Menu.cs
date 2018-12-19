@@ -43,7 +43,7 @@ namespace Projeto_Estacionamento
         private void bt_MenuEntSaidas_Click(object sender, EventArgs e)
         {
             this.Hide();
-            EntradasSaidas entSaid = new EntradasSaidas();
+            CadastroEntradaSaida entSaid = new CadastroEntradaSaida();
             entSaid.ShowDialog();
             this.Show();
         }
