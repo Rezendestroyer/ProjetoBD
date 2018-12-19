@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MongoDB.Bson;
-using Npgsql;
+using MongoDB.Bson.Serialization;
 
 namespace Projeto_Estacionamento
 {
@@ -22,10 +22,6 @@ namespace Projeto_Estacionamento
         }
 
         DBComandos comandos = new DBComandos();
-
-        private NpgsqlConnection connection;
-        private NpgsqlCommand command;
-        private NpgsqlDataReader result;
 
         string cpf = "";
         private string pesquisaIDLE = "Pesquisar...";
@@ -80,24 +76,7 @@ namespace Projeto_Estacionamento
                 {
                     if (MessageBox.Show("Tem certeza de que deseja excluir este registro?", "Excluir registro", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        connectPostgres();
-
-                        command = new NpgsqlCommand("DELETE FROM estacionamento.tb_veiculo WHERE placa = '"
-                            + dg_CadVConsulta.SelectedCells[2].Value.ToString() + "';", connection);
-
-                        command.ExecuteReader();
-
-                        connection.Close();
-
-                        connectPostgres();
-
-                        command = new NpgsqlCommand("SELECT * FROM estacionamento.tb_veiculo;", connection);
-
-                        result = command.ExecuteReader();
-
-                        viewRecords();
-
-                        connection.Close();
+                       
 
                         MessageBox.Show("Registro excluido com sucesso!");
                     }
@@ -127,31 +106,16 @@ namespace Projeto_Estacionamento
         {
             consultar();
 
-            VeiculosDocument docs = comandos.consultarVeiculo(cpf);
-
+            BsonArray  docs = comandos.consultarVeiculo(cpf);
+            
             dg_CadVConsulta.Rows.Clear();
 
-            
-
-            docs.ForEach(doc =>
+            foreach (BsonDocument doc in docs)
             {
-                dg_CadVConsulta.Rows.Add(doc);
-            });
+                VeiculosDocument veiculo = BsonSerializer.Deserialize<VeiculosDocument>(doc);
 
-            consultar();
-
-            connectPostgres();
-
-            command = new NpgsqlCommand("SELECT * FROM estacionamento.tb_veiculo WHERE cpf = @CPF ORDER BY marca;", connection);
-
-            command.Parameters.Add("@CPF", NpgsqlTypes.NpgsqlDbType.Varchar);
-            command.Parameters["@CPF"].Value = cpf;
-
-            result = command.ExecuteReader();
-
-            viewRecords();
-
-            connection.Close();
+                dg_CadVConsulta.Rows.Add(veiculo.marca, veiculo.modelo, veiculo.placa);
+            }
         }
 
         private void bt_CadVSair_Click(object sender, EventArgs e)
@@ -163,21 +127,7 @@ namespace Projeto_Estacionamento
         {
             try
             {
-                connectPostgres();
-
-                command = new NpgsqlCommand("SELECT * FROM estacionamento.tb_veiculo WHERE (marca ~* @DADO OR modelo ~* @DADO OR placa ~* @DADO AND cpf = @CPF) ORDER BY marca;", connection);
-
-                command.Parameters.Add("@DADO", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@DADO"].Value = tb_CadVPesquisa.Text;
-
-                command.Parameters.Add("@CPF", NpgsqlTypes.NpgsqlDbType.Varchar);
-                command.Parameters["@CPF"].Value = cpf;
-
-                result = command.ExecuteReader();
-
-                viewRecords();
-
-                connection.Close();
+                
             }
             catch (Exception excep)
             {
@@ -263,7 +213,7 @@ namespace Projeto_Estacionamento
 
             try
             {
-                connectPostgres();
+                /*connectPostgres();
 
                 command = new NpgsqlCommand("SELECT placa FROM estacionamento.tb_veiculo;", connection);
 
@@ -277,7 +227,7 @@ namespace Projeto_Estacionamento
                     cb_CadVPlaca.Items.Add(result[0].ToString());
                 }
 
-                connection.Close();
+                connection.Close();*/
             }
             catch (Exception excep)
             {
@@ -323,7 +273,7 @@ namespace Projeto_Estacionamento
         {
             try
             {
-                connectPostgres();
+                /*connectPostgres();
 
                 command = new NpgsqlCommand("SELECT * FROM estacionamento.tb_veiculo WHERE placa = @PLACA;", connection);
 
@@ -338,36 +288,7 @@ namespace Projeto_Estacionamento
 
                 tb_CadVMarca.Text = veiculo.getMarca();
                 tb_CadVModelo.Text = veiculo.getModelo();
-            }
-            catch (Exception excep)
-            {
-                MessageBox.Show("Não foi possível obter os valores do banco de dados!\n\nErro: " + excep, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void connectPostgres()
-        {
-            try
-            {
-                connection = new NpgsqlConnection("Server = 127.0.0.1; User Id = postgres; Password = banco; Database = dbestacionamento");
-                connection.Open();
-            }
-            catch (Exception excep)
-            {
-                MessageBox.Show("Não foi possível conectar ao banco de dados!\n\nErro: " + excep, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void viewRecords()
-        {
-            try
-            {
-                dg_CadVConsulta.Rows.Clear();
-
-                while (result.Read())
-                {
-                    dg_CadVConsulta.Rows.Add(result[1], result[2], result[3]);
-                }
+                */
             }
             catch (Exception excep)
             {

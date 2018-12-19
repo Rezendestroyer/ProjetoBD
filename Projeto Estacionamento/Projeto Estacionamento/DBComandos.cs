@@ -178,7 +178,7 @@ namespace Projeto_Estacionamento
 
             ClientesDocument docCliente = clientes.Find(filter).First();
 
-            return docCliente.veiculos;
+            return docCliente.veiculos.AsBsonArray;
         }
 
         public bool cadastrarEntradaSaida(EntradaSaida entradaSaida)
