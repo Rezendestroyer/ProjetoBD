@@ -88,9 +88,9 @@ namespace Projeto_Estacionamento
 
         public bool atualizarCliente(Cliente cliente)
         {
-            /*try
+            try
             {
-
+                return true;
             }
             catch (Exception excep)
             {
@@ -99,8 +99,7 @@ namespace Projeto_Estacionamento
                     "Erro: " + excep, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
-            }*/
-            return false;
+            }
         }
 
         public List<ClientesDocument> consultarClientes()

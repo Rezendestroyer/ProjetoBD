@@ -381,3 +381,16 @@ D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03\Projeto Estacion
 D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03\Projeto Estacionamento\Projeto Estacionamento\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03\Projeto Estacionamento\Projeto Estacionamento\bin\Debug\System.ValueTuple.xml
 D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto Estacionamento.csproj.CopyComplete
+D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03 - Git\ProjetoBD\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto Estacionamento.csprojAssemblyReference.cache
+D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03 - Git\ProjetoBD\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto Estacionamento.exe.config
+D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03 - Git\ProjetoBD\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto_Estacionamento.CadastroCliente.resources
+D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03 - Git\ProjetoBD\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto_Estacionamento.CadastroVeiculo.resources
+D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03 - Git\ProjetoBD\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto_Estacionamento.CadastroEntradaSaida.resources
+D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03 - Git\ProjetoBD\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto_Estacionamento.Menu.resources
+D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03 - Git\ProjetoBD\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto_Estacionamento.Properties.Resources.resources
+D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03 - Git\ProjetoBD\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto_Estacionamento.Relatorio.resources
+D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03 - Git\ProjetoBD\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto_Estacionamento.SplashScreen.resources
+D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03 - Git\ProjetoBD\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto Estacionamento.csproj.GenerateResource.cache
+D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03 - Git\ProjetoBD\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto Estacionamento.csproj.CoreCompileInputs.cache
+D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03 - Git\ProjetoBD\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto Estacionamento.exe
+D:\Users\muril\OneDrive\Documentos\UFU\6_semestre\BD\Projeto 03 - Git\ProjetoBD\Projeto Estacionamento\Projeto Estacionamento\obj\Debug\Projeto Estacionamento.pdb

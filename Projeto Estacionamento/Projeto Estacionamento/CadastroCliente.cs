@@ -176,7 +176,7 @@ namespace Projeto_Estacionamento
         {
             consultar();
 
-            List<ClientesDocument> docs = comandos.consultarCliente();
+            List<ClientesDocument> docs = comandos.consultarClientes();
 
             dg_CadCConsulta.Rows.Clear();
 
